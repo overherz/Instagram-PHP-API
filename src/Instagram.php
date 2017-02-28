@@ -103,6 +103,7 @@ class Instagram
             $this->setApiKey($config['apiKey']);
             $this->setApiSecret($config['apiSecret']);
             $this->setApiCallback($config['apiCallback']);
+			$this->setAccessToken($config['apiAccessToken']);
         } elseif (is_string($config)) {
             // if you only want to access public data
             $this->setApiKey($config);
@@ -202,7 +203,7 @@ class Instagram
             $params['count'] = $limit;
         }
 
-        return $this->_makeCall('users/' . $id . '/media/recent', strlen($this->getAccessToken()), $params);
+		return $this->_makeCall('users/' . $id . '/media/recent', true, array('count' => $limit));
     }
 
     /**
